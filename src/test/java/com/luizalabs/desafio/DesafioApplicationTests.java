@@ -10,4 +10,11 @@ class DesafioApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void readFileServiceTest() {
+		ReadFileService readFileService = new ReadFileService();
+		readFileService.readTextFile();
+
+	}
+
 }
