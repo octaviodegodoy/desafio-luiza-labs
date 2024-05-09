@@ -5,38 +5,30 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ReadFileService {
 
-    public List<String> readTextFile(){
-        String filePath = "D:\\Dev\\luiza_labs\\desafio-luiza-labs\\src\\main\\resources\\data_test_luiza_labs.txt";
-        int targetLine = 1;  // change to the line number you're interested in
-        int targetColumn = 95;  // change to the column number you're interested in
+    public static final String USER_ID = "user_id";
 
-        List<String> retrievedWords = new ArrayList<>();
+    public Map<String,String> readTextFile(){
+        String filePath = "D:\\Dev\\luiza_labs\\desafio-luiza-labs\\src\\main\\resources\\data_test_luiza_labs.txt";
+
+        Map<String,String> orderMap = new HashMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            int lineNumber = 1;
+            int count = 0;
             while ((line = br.readLine()) != null) {
-                if (lineNumber == targetLine) {
-                    String[] words = line.split("\\s+");  // split line into words
-                    for (String word : words) {
-                        retrievedWords.add(word);
-//                        if (word.startsWith(String.valueOf(line.charAt(targetColumn - 1)))) {
-//                            System.out.println(word);
-//                            break;
-//                        }
-                    }
-                    break;
-                }
-                lineNumber++;
+                  String[] words = line.split("\\s+");  // split line into words
+                  String orderLine = words[0];
+                  String[] fields = orderLine.split(",");
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return retrievedWords;
+        return orderMap;
     }
 }
