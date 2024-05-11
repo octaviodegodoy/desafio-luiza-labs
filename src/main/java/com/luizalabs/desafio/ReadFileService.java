@@ -1,7 +1,5 @@
 package com.luizalabs.desafio;
 
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class ReadFileService {
@@ -22,7 +22,7 @@ public class ReadFileService {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                int userId = Integer.valueOf(line.substring(FieldsLocation.USER_ID_BEGIN_INDEX, FieldsLocation.USER_ID_END_INDEX));
+                int userId = Integer.parseInt(line.substring(FieldsLocation.USER_ID_BEGIN_INDEX, FieldsLocation.USER_ID_END_INDEX));
 
                  if (!userOrders.isEmpty()){
 
@@ -31,7 +31,21 @@ public class ReadFileService {
                                      .findFirst();
 
                      if (userOrder.isPresent()) {
+
+                        Product product = new Product();
+                        product.setProduct_id(Integer.parseInt(line.substring(FieldsLocation.PRODUCT_ID_BEGIN_INDEX, FieldsLocation.PRODUCT_ID_END_INDEX)));
+                        product.setValue(new BigDecimal(line.substring(FieldsLocation.PRODUCT_VALUE_BEGIN_INDEX, FieldsLocation.PRODUCT_VALUE_END_INDEX)));
+                        userOrder.get().getOrders().get(0).getProducts().add(product);                         
+
+                        Order order = new Order();
+                        int orderId = Integer.parseInt(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX));
+                        order.setOrder_id(orderId);
+                        order.setDate(line.substring(FieldsLocation.ORDER_DATE_BEGIN_INDEX, FieldsLocation.ORDER_DATE_END_INDEX));
+              
+                        userOrder.get().getOrders().add(order);
+                        
                          //TODO Implementar logica de agrupamento de pedidos e valores
+                         
                          System.out.println("User found with userId: " + userOrder.get().getUser().getUser_id());
                      } else {
                          System.out.println("User not found");

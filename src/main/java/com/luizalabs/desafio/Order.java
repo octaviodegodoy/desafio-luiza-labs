@@ -1,12 +1,13 @@
 package com.luizalabs.desafio;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Order {
     private int order_id;
-    private String total;
     private String date;
     private List<Product> products;
+    private BigDecimal total = BigDecimal.ZERO;
 
     public int getOrder_id() {
         return order_id;
@@ -16,14 +17,15 @@ public class Order {
         this.order_id = order_id;
     }
 
-    public String getTotal() {
-        return total;
+    public BigDecimal getTotal() {
+        return products.stream().map(Product::getValue).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public void setTotal(String total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
-    }
+    }    
 
+ 
     public String getDate() {
         return date;
     }
