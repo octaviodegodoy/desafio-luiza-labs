@@ -35,40 +35,29 @@ public class ReadFileService {
                         Product product = new Product();
                         product.setProduct_id(Integer.parseInt(line.substring(FieldsLocation.PRODUCT_ID_BEGIN_INDEX, FieldsLocation.PRODUCT_ID_END_INDEX)));
                         product.setValue(new BigDecimal(line.substring(FieldsLocation.PRODUCT_VALUE_BEGIN_INDEX, FieldsLocation.PRODUCT_VALUE_END_INDEX)));
-                        userOrder.get().getOrders().get(0).getProducts().add(product);                         
-
-                        Order order = new Order();
-                        int orderId = Integer.parseInt(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX));
-                        order.setOrder_id(orderId);
-                        order.setDate(line.substring(FieldsLocation.ORDER_DATE_BEGIN_INDEX, FieldsLocation.ORDER_DATE_END_INDEX));
-              
-                        userOrder.get().getOrders().add(order);
+                        
+                        Optional<Order> order = userOrder.get().getOrders().stream()
+                                .filter(o -> o.getOrder_id() == Integer.parseInt(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX)))
+                                .findFirst();
+                        if (order.isPresent()) {
+                            order.get().getProducts().add(product);
+                        } else {
+                            Order newOrder = new Order();
+                            newOrder.setOrder_id(Integer.parseInt(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX)));
+                            newOrder.setDate(line.substring(FieldsLocation.ORDER_DATE_BEGIN_INDEX, FieldsLocation.ORDER_DATE_END_INDEX));
+                            newOrder.getProducts().add(product);
+                            userOrder.get().getOrders().add(newOrder);
+                        }
                         
                          //TODO Implementar logica de agrupamento de pedidos e valores
                          
                          System.out.println("User found with userId: " + userOrder.get().getUser().getUser_id());
                      } else {
+                         //TODO add new user and order
                          System.out.println("User not found");
                      }
                      
                  }
-
-
-                  Product product = new Product();
-                  product.setProduct_id(Integer.valueOf(line.substring(FieldsLocation.PRODUCT_ID_BEGIN_INDEX, FieldsLocation.PRODUCT_ID_END_INDEX)));
-
-                  String productValue = line.substring(FieldsLocation.PRODUCT_VALUE_BEGIN_INDEX, FieldsLocation.PRODUCT_VALUE_END_INDEX).trim();
-                  product.setValue(new BigDecimal(productValue));
-                  List<Product> products = new ArrayList<>();
-                  products.add(product);
-
-                  Order order = new Order();
-                  order.setOrder_id(Integer.valueOf(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX)));
-                  order.setDate(line.substring(FieldsLocation.ORDER_DATE_BEGIN_INDEX, FieldsLocation.ORDER_DATE_END_INDEX));
-                  order.setProducts(products);
-
-                  List<Order> orders = new ArrayList<>();
-                  orders.add(order);
 
                   User user = new User();
                   user.setUser_id(userId);
