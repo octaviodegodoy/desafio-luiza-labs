@@ -6,7 +6,6 @@ public class User {
 
     private int user_id;
     private String name;
-    private List<Order> orders;
 
     public int getUser_id() {
         return user_id;
@@ -24,11 +23,4 @@ public class User {
         this.name = name;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 }

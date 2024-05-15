@@ -1,12 +1,14 @@
 package com.luizalabs.desafio;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
     private int order_id;
     private BigDecimal total;
-    private String date;
+    private LocalDate date;
     private List<Product> products;
 
     public int getOrder_id() {
@@ -17,11 +19,11 @@ public class Order {
         this.order_id = order_id;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -29,14 +31,25 @@ public class Order {
         return products;
     }
 
+    public BigDecimal getTotal() {
+        return total;
+    }
+
     public void setProducts(List<Product> products) {
         this.products = products;
     }
 
-    public void calculateTotal(){
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
 
-        this.total = this.products.stream()
-                .map(Product::getValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public void calculateTotal(){
+        if (this.products != null) {
+            this.total = this.products.stream()
+                    .map(Product::getValue)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
+
+
     }
 }
