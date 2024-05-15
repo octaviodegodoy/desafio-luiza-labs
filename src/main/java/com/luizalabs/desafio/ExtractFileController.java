@@ -45,14 +45,27 @@ public class ExtractFileController {
         List<UserOrder> userOrders = readFileService.readFolderFiles(); // replace this with your method to get the list
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate startDate = LocalDate.parse(start, formatter);
-        LocalDate endDate = LocalDate.parse(end, formatter);
 
 
-        return readFileService.readFolderFiles().stream()
-                .flatMap(userOrder -> userOrder.getOrders().stream())
-                .filter(order -> !order.getDate().isBefore(startDate) && !order.getDate().isAfter(endDate))
-                .collect(Collectors.toList());
+        if ((start != null) && (end != null)) {
+
+            LocalDate startDate = LocalDate.parse(start, formatter);
+            LocalDate endDate = LocalDate.parse(end, formatter);
+
+            return readFileService.readFolderFiles().stream()
+                    .flatMap(userOrder -> userOrder.getOrders().stream())
+                    .filter(order -> !order.getDate().isBefore(startDate) && !order.getDate().isAfter(endDate))
+                    .collect(Collectors.toList());
+
+        } else {
+
+            return readFileService.readFolderFiles().stream()
+                    .flatMap(userOrder -> userOrder.getOrders().stream())
+                    .collect(Collectors.toList());
+
+        }
+
+
 
 
     }
