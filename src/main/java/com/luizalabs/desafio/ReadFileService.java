@@ -1,7 +1,5 @@
 package com.luizalabs.desafio;
 
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class ReadFileService {
@@ -22,7 +22,7 @@ public class ReadFileService {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                int userId = Integer.valueOf(line.substring(FieldsLocation.USER_ID_BEGIN_INDEX, FieldsLocation.USER_ID_END_INDEX));
+                int userId = Integer.parseInt(line.substring(FieldsLocation.USER_ID_BEGIN_INDEX, FieldsLocation.USER_ID_END_INDEX));
 
                  if (!userOrders.isEmpty()){
 
@@ -31,30 +31,33 @@ public class ReadFileService {
                                      .findFirst();
 
                      if (userOrder.isPresent()) {
+
+                        Product product = new Product();
+                        product.setProduct_id(Integer.parseInt(line.substring(FieldsLocation.PRODUCT_ID_BEGIN_INDEX, FieldsLocation.PRODUCT_ID_END_INDEX)));
+                        product.setValue(new BigDecimal(line.substring(FieldsLocation.PRODUCT_VALUE_BEGIN_INDEX, FieldsLocation.PRODUCT_VALUE_END_INDEX)));
+                        
+                        Optional<Order> order = userOrder.get().getOrders().stream()
+                                .filter(o -> o.getOrder_id() == Integer.parseInt(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX)))
+                                .findFirst();
+                        if (order.isPresent()) {
+                            order.get().getProducts().add(product);
+                        } else {
+                            Order newOrder = new Order();
+                            newOrder.setOrder_id(Integer.parseInt(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX)));
+                            newOrder.setDate(line.substring(FieldsLocation.ORDER_DATE_BEGIN_INDEX, FieldsLocation.ORDER_DATE_END_INDEX));
+                            newOrder.getProducts().add(product);
+                            userOrder.get().getOrders().add(newOrder);
+                        }
+                        
                          //TODO Implementar logica de agrupamento de pedidos e valores
+                         
                          System.out.println("User found with userId: " + userOrder.get().getUser().getUser_id());
                      } else {
+                         //TODO add new user and order
                          System.out.println("User not found");
                      }
                      
                  }
-
-
-                  Product product = new Product();
-                  product.setProduct_id(Integer.valueOf(line.substring(FieldsLocation.PRODUCT_ID_BEGIN_INDEX, FieldsLocation.PRODUCT_ID_END_INDEX)));
-
-                  String productValue = line.substring(FieldsLocation.PRODUCT_VALUE_BEGIN_INDEX, FieldsLocation.PRODUCT_VALUE_END_INDEX).trim();
-                  product.setValue(new BigDecimal(productValue));
-                  List<Product> products = new ArrayList<>();
-                  products.add(product);
-
-                  Order order = new Order();
-                  order.setOrder_id(Integer.valueOf(line.substring(FieldsLocation.ORDER_ID_BEGIN_INDEX, FieldsLocation.ORDER_ID_END_INDEX)));
-                  order.setDate(line.substring(FieldsLocation.ORDER_DATE_BEGIN_INDEX, FieldsLocation.ORDER_DATE_END_INDEX));
-                  order.setProducts(products);
-
-                  List<Order> orders = new ArrayList<>();
-                  orders.add(order);
 
                   User user = new User();
                   user.setUser_id(userId);
