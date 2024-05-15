@@ -3,8 +3,9 @@
 Teste de conhecimento Java REST API
 
 # Para executar no IntelliJ IDE
+  Verificar se o JDK instalado é 17.0.8.1 ou superior
   No maven usar o plugin spring-boot:
-    - spring-boot:run
+    - mvn spring-boot:run
 
 # Para consultas 
  Listar todos os dados no formato JSON:
