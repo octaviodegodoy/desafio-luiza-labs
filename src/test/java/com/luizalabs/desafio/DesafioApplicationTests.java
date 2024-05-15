@@ -54,9 +54,11 @@ class DesafioApplicationTests {
 							createNewOrderProductAddToOrders(userOrder, line);
 						}
 
+					} else {
+						userOrders.add(createUserOrder(line));
 					}
 
-				userOrders = createUserOrder(line);
+
 
 
 				Assertions.assertNotNull(userOrders);
@@ -99,7 +101,7 @@ class DesafioApplicationTests {
 		optionalOrder.get().calculateTotal();
 	}
 
-	private static List<UserOrder> createUserOrder(String line) {
+	private static UserOrder createUserOrder(String line) {
 
 		int userId = Integer.parseInt(line.substring(FieldsLocation.USER_ID_BEGIN_INDEX, FieldsLocation.USER_ID_END_INDEX));
 		int productId = Integer.parseInt(line.substring(FieldsLocation.PRODUCT_ID_BEGIN_INDEX, FieldsLocation.PRODUCT_ID_END_INDEX));
@@ -108,8 +110,6 @@ class DesafioApplicationTests {
 		BigDecimal productValue = new BigDecimal(value);
 		String userName = line.substring(FieldsLocation.USER_ID_NAME_BEGIN_INDEX, FieldsLocation.USER_ID_NAME_END_INDEX);
 		String orderDate = line.substring(FieldsLocation.ORDER_DATE_BEGIN_INDEX, FieldsLocation.ORDER_DATE_END_INDEX);
-
-		List<UserOrder> userOrders = new ArrayList<>();
 
 		List<Product> products = new ArrayList<>();
 		Product product = new Product();
@@ -134,9 +134,9 @@ class DesafioApplicationTests {
 		UserOrder createUserOrder = new UserOrder();
 		createUserOrder.setUser(user);
 		createUserOrder.setOrders(orders);
-		userOrders.add(createUserOrder);
 
-		return userOrders;
+		return createUserOrder;
+
 	}
 
 }
