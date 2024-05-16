@@ -17,4 +17,4 @@ Teste de conhecimento Java REST API
  Listar por intervalo de Datas:
  Entrar com as datas sem espaços como descrito abaixo:
   Exemplo de datas : startDate=20210909, endDate=20211126
- - 'http://localhost:8080/listdates?startDate=<startDate>&endDate=<endDate>'
+ - 'http://localhost:8080/listdates?startDate=[startDate]&endDate=[endDate]'
