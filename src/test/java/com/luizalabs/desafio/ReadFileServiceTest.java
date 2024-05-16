@@ -17,9 +17,6 @@ public class ReadFileServiceTest {
     @InjectMocks
     private ReadFileService readFileService;
 
-    @Mock
-    private Path mockPath;
-
     @Test
     public void testReadFolderFiles() {
         List<UserOrder> userOrders = readFileService.readFolderFiles();
