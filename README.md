@@ -1,6 +1,14 @@
 # Desafio Luiza Labs - Luiz Octavio Godoy
 
 Teste de conhecimento Java REST API
+# Padrao estrutura basica MVC
+Logica de negócio implementada em classe Service
+RestController para fazer as chamadas e apresentar no formato JSON.
+
+# Tecnologias utilizadas
+SpringBoot 3.2.5
+Java 17
+JUnit 5.8.2 
 
 # Build e execução
   Verificar se o JDK instalado é 17.0.8.1 ou superior
