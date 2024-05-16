@@ -13,7 +13,7 @@ Teste de conhecimento Java REST API
  Listar todos os dados no formato JSON:
  -  http://localhost:8080/listdata
  Listar ordem por orderId:
- - 'http://localhost:8080/listorders?orderId=<orderId>'
+ - "http://localhost:8080/listorders?orderId=orderId"
  Listar por intervalo de Datas:
  Entrar com as datas sem espaços como descrito abaixo:
   Exemplo de datas : startDate=20210909, endDate=20211126
