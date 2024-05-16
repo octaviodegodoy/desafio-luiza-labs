@@ -1,4 +1,7 @@
-package com.luizalabs.desafio;
+package com.luizalabs.desafio.model;
+
+import com.luizalabs.desafio.model.Order;
+import com.luizalabs.desafio.model.User;
 
 import java.util.List;
 

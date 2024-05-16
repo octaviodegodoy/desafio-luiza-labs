@@ -1,7 +1,5 @@
-package com.luizalabs.desafio;
+package com.luizalabs.desafio.service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -14,6 +12,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import com.luizalabs.desafio.constants.FieldsLocation;
+import com.luizalabs.desafio.model.Order;
+import com.luizalabs.desafio.model.Product;
+import com.luizalabs.desafio.model.User;
+import com.luizalabs.desafio.model.UserOrder;
 import org.springframework.stereotype.Service;
 
 @Service

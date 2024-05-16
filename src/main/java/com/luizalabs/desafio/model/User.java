@@ -1,4 +1,4 @@
-package com.luizalabs.desafio;
+package com.luizalabs.desafio.model;
 
 import java.util.List;
 

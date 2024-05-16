@@ -1,8 +1,7 @@
-package com.luizalabs.desafio;
+package com.luizalabs.desafio.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class Order {

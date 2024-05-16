@@ -1,4 +1,4 @@
-package com.luizalabs.desafio;
+package com.luizalabs.desafio.constants;
 
 public class FieldsLocation {
 

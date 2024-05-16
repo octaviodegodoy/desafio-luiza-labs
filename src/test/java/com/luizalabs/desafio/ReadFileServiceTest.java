@@ -1,12 +1,12 @@
 package com.luizalabs.desafio;
 
+import com.luizalabs.desafio.model.UserOrder;
+import com.luizalabs.desafio.service.ReadFileService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.nio.file.Path;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

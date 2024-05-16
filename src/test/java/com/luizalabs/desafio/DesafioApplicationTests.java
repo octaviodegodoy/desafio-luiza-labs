@@ -1,9 +1,13 @@
 package com.luizalabs.desafio;
 
+import com.luizalabs.desafio.constants.FieldsLocation;
+import com.luizalabs.desafio.model.Order;
+import com.luizalabs.desafio.model.Product;
+import com.luizalabs.desafio.model.User;
+import com.luizalabs.desafio.model.UserOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.math.BigDecimal;

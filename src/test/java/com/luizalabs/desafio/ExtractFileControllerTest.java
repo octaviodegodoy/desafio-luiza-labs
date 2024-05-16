@@ -1,5 +1,11 @@
 package com.luizalabs.desafio;
 
+import com.luizalabs.desafio.controller.ExtractFileController;
+import com.luizalabs.desafio.model.Order;
+import com.luizalabs.desafio.model.Product;
+import com.luizalabs.desafio.model.User;
+import com.luizalabs.desafio.model.UserOrder;
+import com.luizalabs.desafio.service.ReadFileService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
